@@ -1,0 +1,5 @@
+[functions.kirim-push]
+verify_jwt = false
+
+[functions.kelola-akun]
+verify_jwt = true

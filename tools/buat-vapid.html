@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buat kunci VAPID</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #17211C; }
+  button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px; background: #0B5E45; color: #fff; font-weight: 700; font-size: 15px; }
+  label { display: block; font-weight: 700; margin: 18px 0 6px; }
+  textarea { width: 100%; box-sizing: border-box; font-family: monospace; font-size: 13px; padding: 10px; border: 1.5px solid #C3D0C8; border-radius: 8px; }
+  p { color: #4F5D56; }
+</style>
+</head>
+<body>
+<h1>Buat kunci notifikasi (VAPID)</h1>
+<p>Halaman ini membuat sepasang kunci langsung di browser Anda, tanpa mengirim apa pun ke internet. Cukup dibuat sekali.</p>
+<button id="buat" type="button">Buat kunci</button>
+<label for="pub">Kunci publik → isi di <code>js/config.js</code> dan di secret <code>VAPID_PUBLIC_KEY</code></label>
+<textarea id="pub" rows="3" readonly></textarea>
+<label for="priv">Kunci privat → hanya di secret <code>VAPID_PRIVATE_KEY</code> (jangan dibagikan, jangan ditaruh di GitHub)</label>
+<textarea id="priv" rows="2" readonly></textarea>
+<script>
+const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+document.getElementById('buat').addEventListener('click', async () => {
+  const k = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveBits']);
+  document.getElementById('pub').value = b64url(await crypto.subtle.exportKey('raw', k.publicKey));
+  document.getElementById('priv').value = (await crypto.subtle.exportKey('jwk', k.privateKey)).d;
+});
+</script>
+</body>
+</html>
