@@ -113,3 +113,9 @@ td.angka, th.angka { text-align: right; }
   border-radius: 12px; font-size: 14px; max-width: calc(100% - 32px); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 20; }
 #toast.tampil { opacity: 1; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* dialog ubah data */
+dialog.dialog { border: 0; border-radius: 16px; padding: 20px; width: calc(100% - 32px); max-width: 460px; color: var(--tinta); }
+dialog.dialog::backdrop { background: rgba(10, 25, 18, .45); }
+.aksi { display: flex; gap: 6px; flex-wrap: wrap; }
+.aksi .tombol { min-height: 36px; padding: 0 10px; font-size: 13px; }

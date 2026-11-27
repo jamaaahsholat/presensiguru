@@ -1,5 +1,5 @@
 // Service worker: tampilan bisa dibuka cepat + menerima notifikasi browser
-const CACHE = 'presensi-v1';
+const CACHE = 'presensi-v2';
 const ASET = ['./', 'index.html', 'css/app.css', 'js/app.js', 'js/api.js', 'js/ui.js', 'js/config.js',
   'js/pages/guru.js', 'js/pages/kelola.js', 'js/pages/laporan.js', 'js/pages/umum.js', 'manifest.webmanifest', 'icons/icon-192.png'];
 

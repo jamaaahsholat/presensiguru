@@ -165,3 +165,21 @@ export function unduhFile(nama, isi, tipe) {
   document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
+
+// Jendela isian sederhana. Mengembalikan objek {nama_isian: nilai} atau null bila dibatalkan.
+export function dialog(judul, isiHTML, teksOk = 'Simpan') {
+  return new Promise((resolve) => {
+    const d = document.createElement('dialog');
+    d.className = 'dialog';
+    d.innerHTML = `<form method="dialog" class="form"><h2 style="font-size:17px">${h(judul)}</h2>${isiHTML}
+      <div class="baris" style="justify-content:flex-end"><button value="batal" class="tombol garis" formnovalidate>Batal</button>
+      <button value="ok" class="tombol">${h(teksOk)}</button></div></form>`;
+    document.body.append(d);
+    d.addEventListener('close', () => {
+      const ok = d.returnValue === 'ok';
+      const data = ok ? Object.fromEntries(new FormData(d.querySelector('form'))) : null;
+      d.remove(); resolve(data);
+    });
+    d.showModal();
+  });
+}

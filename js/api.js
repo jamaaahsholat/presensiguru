@@ -20,6 +20,8 @@ function terjemahError(m) {
   if (/JWT expired/i.test(m)) return 'Sesi login habis, silakan login ulang';
   if (/Failed to fetch|NetworkError/i.test(m)) return 'Tidak ada koneksi internet';
   if (/row-level security/i.test(m)) return 'Anda tidak punya akses untuk tindakan ini';
+  if (/foreign key constraint/i.test(m)) return 'Data ini masih dipakai oleh jadwal atau catatan kehadiran, jadi tidak bisa dihapus. Ubah atau nonaktifkan saja.';
+  if (/duplicate key/i.test(m)) return 'Nama ini sudah ada';
   return m;
 }
 
